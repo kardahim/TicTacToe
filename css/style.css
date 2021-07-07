@@ -1,0 +1,29 @@
+/* basic */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+}
+
+body {
+    background: #212121;
+}
+
+/* score */
+.score {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px 0;
+}
+
+.score-x, .score-o {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+}
+
+.score > div > span {
+    margin: 0 5px;
+}
