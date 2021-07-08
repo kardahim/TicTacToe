@@ -17,7 +17,7 @@ body {
     margin: 10px 0;
 }
 
-.score-x, .score-o {
+.score-x, .score-o, .turn {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -32,6 +32,7 @@ body {
 .border {
     display: flex;
     flex-direction: column;
+    margin-top: 15vh;
 }
 
 .row {
@@ -47,6 +48,11 @@ body {
     align-items: center;
     font-size: 30px;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.area:hover {
+    background: #323232;
 }
 
 #area2, #area5, #area8 {
