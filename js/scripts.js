@@ -11,9 +11,13 @@ document.getElementById("result").addEventListener("click", () => {
     reset();
 })
 
+window.addEventListener("resize", () => {
+    winner(false);
+});
+
 function game() {
     draw(this.id);
-    winner();
+    winner(true);
 }
 
 function draw(id) {
@@ -43,7 +47,7 @@ function changePlayer() {
     return player;
 }
 
-function winner() {
+function winner(x) {
     var c0 = area[0].innerText;
     var c1 = area[1].innerText;
     var c2 = area[2].innerText;
@@ -57,84 +61,103 @@ function winner() {
     // horizontal
     if (c0 === "X" && c1 === "X" && c2 === "X") {
         horizontalLine(0, 1, 2);
-        showWinner(1);
+        if (x === true)
+            showWinner(1);
     }
     else if (c3 === "X" && c4 === "X" && c5 === "X") {
         horizontalLine(3, 4, 5);
-        showWinner(1);
+        if (x === true)
+            showWinner(1);
     }
     else if (c6 === "X" && c7 === "X" && c8 === "X") {
         horizontalLine(6, 7, 8);
-        showWinner(1);
+        if (x === true)
+            showWinner(1);
     }
     else if (c0 === "O" && c1 === "O" && c2 === "O") {
         horizontalLine(0, 1, 2);
-        showWinner(2);
+        if (x === true)
+            showWinner(2);
     }
     else if (c3 === "O" && c4 === "O" && c5 === "O") {
         horizontalLine(3, 4, 5);
-        showWinner(2);
+        if (x === true)
+            showWinner(2);
     }
     else if (c6 === "O" && c7 === "O" && c8 === "O") {
         horizontalLine(6, 7, 8);
-        showWinner(2);
+        if (x === true)
+            showWinner(2);
     }
     // vertical
     else if (c0 === "X" && c3 === "X" && c6 === "X") {
         verticalLine(0, 3, 6);
-        showWinner(1);
+        if (x === true)
+            showWinner(1);
     }
     else if (c1 === "X" && c4 === "X" && c7 === "X") {
         verticalLine(1, 4, 7);
-        showWinner(1);
+        if (x === true)
+            showWinner(1);
     }
     else if (c2 === "X" && c5 === "X" && c8 === "X") {
         verticalLine(2, 5, 8);
-        showWinner(1);
+        if (x === true)
+            showWinner(1);
     }
     else if (c0 === "O" && c3 === "O" && c6 === "O") {
         verticalLine(0, 3, 6);
-        showWinner(2);
+        if (x === true)
+            showWinner(2);
     }
     else if (c1 === "O" && c4 === "O" && c7 === "O") {
         verticalLine(1, 4, 7);
-        showWinner(2);
+        if (x === true)
+            showWinner(2);
     }
     else if (c2 === "O" && c5 === "O" && c8 === "O") {
         verticalLine(2, 5, 8);
-        showWinner(2);
+        if (x === true)
+            showWinner(2);
     }
     // diagonal left
     else if (c0 === "X" && c4 === "X" && c8 === "X") {
         diagonalLine(0, 4, 8, true);
-        showWinner(1);
+        if (x === true)
+            showWinner(1);
     }
     else if (c0 === "O" && c4 === "O" && c8 === "O") {
         diagonalLine(0, 4, 8, true);
-        showWinner(2);
+        if (x === true)
+            showWinner(2);
     }
     else if (c2 === "X" && c4 === "X" && c6 === "X") {
         diagonalLine(2, 4, 6, false);
-        showWinner(1);
+        if (x === true)
+            showWinner(1);
     }
     else if (c2 === "O" && c4 === "O" && c6 === "O") {
         diagonalLine(2, 4, 6, false);
-        showWinner(2);
+        if (x === true)
+            showWinner(2);
     }
     // draw
     else if (c0 != "" && c1 != "" && c2 != "" && c3 != "" && c4 != "" && c5 != "" && c6 != "" && c7 != "" && c8 != "") {
-        showWinner(0);
+        if (x === true)
+            showWinner(0);
     }
 }
 
 function horizontalLine(f1, f2, f3) {
+    var width = area[0].clientWidth;
+
     divider[f1].style.borderBottom = "4px solid white";
     divider[f2].style.borderBottom = "4px solid white";
     divider[f3].style.borderBottom = "4px solid white";
 
-    divider[f1].style.width = "10vw";
-    divider[f2].style.width = "10vw";
-    divider[f3].style.width = "10vw";
+    divider[f1].style.width = `${width}px`;
+    divider[f2].style.width = `${width}px`;
+    divider[f3].style.width = `${width}px`;
 
     divider[f1].style.position = "absolute";
     divider[f2].style.position = "absolute";
@@ -142,13 +165,15 @@ function horizontalLine(f1, f2, f3) {
 }
 
 function verticalLine(f1, f2, f3) {
+    var width = area[0].clientWidth;
+
     divider[f1].style.borderLeft = "4px solid white";
     divider[f2].style.borderLeft = "4px solid white";
     divider[f3].style.borderLeft = "4px solid white";
 
-    divider[f1].style.height = "10vw";
-    divider[f2].style.height = "10vw";
-    divider[f3].style.height = "10vw";
+    divider[f1].style.height = `${width}px`;
+    divider[f2].style.height = `${width}px`;
+    divider[f3].style.height = `${width}px`;
 
     divider[f1].style.position = "absolute";
     divider[f2].style.position = "absolute";
@@ -156,13 +181,15 @@ function verticalLine(f1, f2, f3) {
 }
 
 function diagonalLine(f1, f2, f3, f4) {
+    var width = area[0].clientWidth;
+
     divider[f1].style.borderBottom = "4px solid white";
     divider[f2].style.borderBottom = "4px solid white";
     divider[f3].style.borderBottom = "4px solid white";
 
-    divider[f1].style.width = "14.142vw";
-    divider[f2].style.width = "14.142vw";
-    divider[f3].style.width = "14.142vw";
+    divider[f1].style.width = `${width * 1.4142}px`;
+    divider[f2].style.width = `${width * 1.4142}px`;
+    divider[f3].style.width = `${width * 1.4142}px`;
 
     divider[f1].style.position = "absolute";
     divider[f2].style.position = "absolute";
